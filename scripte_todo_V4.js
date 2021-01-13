@@ -39,7 +39,7 @@ $formAdd.submit( function(evt){
     <ul>
         {{#each todos}}
         <li>
-            <h2>{{title}}</h2><br>
+            <h2>{{title}} <button class="btn-delete" type="button" data-id="{{@index}}">&times;</button></h2>
             {{content}}<br>
             {{fCreatedAt}}
         </li>
@@ -50,6 +50,18 @@ $formAdd.submit( function(evt){
     $contTodos.html( template({
         todos: todos
     }));
+
+    var JQnodes = $(".btn-delete");
+    var domnods = document.querySelectorAll(".btn-delete");
+
+    console.log(JQnodes);
+    console.log(domnods);
+
+    $(".btn-delete").click(function (){
+        console.log(this);
+        this.getAttribute("data-id");
+    });
+
     $title.val("");
     $content.val("");
 });
