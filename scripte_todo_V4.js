@@ -1,8 +1,18 @@
+var myLocale = "ar-AE";
+
 var Todo=function (title , content){
     this.title = title ;
     this.content = content ; 
     this.createdAt = new Date();
+
+    this.fCreatedAt = this.formatCreatedAt();
 }
+
+Todo.prototype.formatCreatedAt=function(){
+    const ops = {month: 'long', day: 'numeric', year: 'numeric'};
+    return new Intl.DateTimeFormat(myLocale, ops).format(this.createdAt);
+}
+
 var $btnAdd = $("#btnAdd");
 var $title = $("#title");
 var $content = $("#content");
@@ -24,14 +34,14 @@ $formAdd.submit( function(evt){
 
     todos.push(newTodo);
 
-    var template = Handlebars.compile(/*html*/
+    var template = Handlebars.compile(        /*html*/
     `
     <ul>
         {{#each todos}}
         <li>
-            {{title}}<br>
+            <h2>{{title}}</h2><br>
             {{content}}<br>
-            {{createdAt}}
+            {{fCreatedAt}}
         </li>
         {{/each}}
     </ul> 
